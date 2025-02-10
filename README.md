@@ -36,6 +36,30 @@ A fitness tracking application focused on strength training and workout progress
 
 1. Install dependencies:
 
+   ```bash
+   pnpm install
+   ```
+
+2. Start development server:
+
+   ```bash
+   # Boot frontend server
+   pnpm --filter frontend dev
+
+   # Boot backend server
+   pnpm --filter backend dev
+   ```
+
+3. Open your browser and navigate to:
+   - Frontend: [http://localhost:5173](http://localhost:5173)
+   - Backend: [http://localhost:8787](http://localhost:8787)
+
+4. Build for production:
+
+   ```bash
+   pnpm build
+   ```
+
 ## Contributing
 
 1. Fork the repository
@@ -50,4 +74,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-Ryota Ikezawa <ryota.ikezawa@gmail.com>
+Ryota Ikezawa <pavegy@gmail.com>
