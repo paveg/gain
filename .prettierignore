@@ -1,0 +1,23 @@
+# Build outputs
+dist
+build
+out
+.next
+.nuxt
+
+# Dependencies
+node_modules
+.pnpm-store
+
+# Cache
+.cache
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+
+# Misc
+.DS_Store
+.env*
+!.env.example
+coverage
+*.log 

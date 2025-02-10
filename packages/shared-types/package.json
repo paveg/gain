@@ -1,0 +1,8 @@
+{
+  "name": "@gain/shared-types",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "author": "Ryota Ikezawa <ryota.ikezawa@gmail.com>",
+  "license": "MIT",
+  "type": "module"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend application for Gain project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/index.ts"
+  },
+  "keywords": [
+    "gain",
+    "backend",
+    "hono",
+    "cloudflare-workers"
+  ],
+  "author": "Ryota Ikezawa <ryota.ikezawa@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20250204.0",
+    "@gain/shared-types": "workspace:^",
+    "hono": "^4.7.0",
+    "wrangler": "^3.107.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.19.0",
+    "prettier": "^3.5.0",
+    "typescript": "~5.7.2"
+  }
+}
