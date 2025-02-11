@@ -7,9 +7,7 @@
   "paths": {
     "/ping": {
       "get": {
-        "tags": [
-          "System"
-        ],
+        "tags": ["System"],
         "responses": {
           "200": {
             "description": "Successful ping response",
@@ -20,18 +18,13 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "enum": [
-                        "pong"
-                      ]
+                      "enum": ["pong"]
                     },
                     "timestamp": {
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message",
-                    "timestamp"
-                  ]
+                  "required": ["message", "timestamp"]
                 }
               }
             }

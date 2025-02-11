@@ -1,8 +1,20 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const BACKEND_URL = 'http://localhost:8787'
 
-export const customInstance = <T>({ url, method, params, data }: any): Promise<T> => {
+interface CustomRequestConfig extends Omit<AxiosRequestConfig, 'url' | 'method'> {
+  url: string
+  method: 'get' | 'post' | 'put' | 'delete' | 'patch'
+  params?: Record<string, unknown>
+  data?: unknown
+}
+
+export const customInstance = <T>({
+  url,
+  method,
+  params,
+  data,
+}: CustomRequestConfig): Promise<T> => {
   return axios({
     url,
     method,
@@ -12,5 +24,5 @@ export const customInstance = <T>({ url, method, params, data }: any): Promise<T
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then((res) => res.data)
+  }).then((res: AxiosResponse<T>) => res.data)
 }

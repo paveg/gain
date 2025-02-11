@@ -1,4 +1,3 @@
-import React from 'react'
 import { PingButton } from './components/PingButton'
 import { QueryProvider } from './providers/query-provider'
 

@@ -8,7 +8,7 @@
 export type GetPing200Message = typeof GetPing200Message[keyof typeof GetPing200Message];
 
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+ 
 export const GetPing200Message = {
   pong: 'pong',
 } as const;

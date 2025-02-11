@@ -1,5 +1,5 @@
+import { useGetPing } from '@/api/generated/system/system'
 import React from 'react'
-import { useGetPing } from '../api/generated/system'
 
 export const PingButton: React.FC = () => {
   const { data, isLoading, error } = useGetPing()
