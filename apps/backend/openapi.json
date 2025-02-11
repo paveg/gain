@@ -21,7 +21,7 @@
                     "message": {
                       "type": "string",
                       "enum": [
-                        "pong"
+                        "pong!"
                       ]
                     },
                     "timestamp": {

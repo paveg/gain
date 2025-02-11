@@ -20,7 +20,7 @@ const pingRoute = createRoute({
       content: {
         'application/json': {
           schema: z.object({
-            message: z.literal('pong'),
+            message: z.literal('pong!'),
             timestamp: z.string(),
           }),
         },
@@ -43,7 +43,7 @@ app.use('/*', cors())
 
 app.openapi(pingRoute, c => {
   return c.json({
-    message: 'pong' as const,
+    message: 'pong!' as const,
     timestamp: new Date().toISOString(),
   })
 })
@@ -69,7 +69,7 @@ const apiSpec = {
                   properties: {
                     message: {
                       type: 'string',
-                      enum: ['pong'],
+                      enum: ['pong!'],
                     },
                     timestamp: {
                       type: 'string',
