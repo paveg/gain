@@ -71,4 +71,4 @@ export default {
     },
   },
   plugins: [animate],
-} satisfies Config 
+} satisfies Config

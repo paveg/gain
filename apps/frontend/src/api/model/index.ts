@@ -5,5 +5,5 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export * from './getPing200';
-export * from './getPing200Message';
+export * from './getPing200'
+export * from './getPing200Message'

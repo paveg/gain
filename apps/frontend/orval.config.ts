@@ -15,6 +15,25 @@ export default defineConfig({
           path: './src/api/mutator/custom-instance.ts',
           name: 'customInstance',
         },
+        query: {
+          useQuery: true,
+          useInfinite: false,
+          useInfiniteQueryParam: undefined,
+          options: {
+            staleTime: 10000,
+          },
+        },
+        operations: {
+          getPing: {
+            query: {
+              useQuery: true,
+              useInfinite: false,
+              override: {
+                useSingleFunction: true,
+              },
+            },
+          },
+        },
       },
     },
   },

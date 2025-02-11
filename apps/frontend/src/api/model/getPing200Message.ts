@@ -5,10 +5,8 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type GetPing200Message = typeof GetPing200Message[keyof typeof GetPing200Message];
+export type GetPing200Message = (typeof GetPing200Message)[keyof typeof GetPing200Message]
 
-
- 
 export const GetPing200Message = {
   pong: 'pong',
-} as const;
+} as const

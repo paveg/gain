@@ -1,28 +1,28 @@
 import js from '@eslint/js'
-import typescript from '@typescript-eslint/eslint-plugin'
-import typescriptParser from '@typescript-eslint/parser'
 import globals from 'globals'
 
 export default [
+  js.configs.recommended,
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.es2021,
-      },
-      parser: typescriptParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
+        ...globals.node,
       },
     },
-    plugins: {
-      '@typescript-eslint': typescript,
-    },
-    rules: {
-      ...js.configs.recommended.rules,
-      ...typescript.configs.recommended.rules,
-    },
+    ignores: [
+      // 自動生成されるコード
+      '**/generated/**',
+      '**/model/**',
+      '**/api/client.ts',
+
+      // 設定ファイル
+      '**/*.config.js',
+      '**/*.config.ts',
+
+      // ビルド出力
+      '**/dist/**',
+      '**/build/**',
+    ],
   },
 ]

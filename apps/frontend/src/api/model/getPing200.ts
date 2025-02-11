@@ -4,9 +4,9 @@
  * Gain API
  * OpenAPI spec version: 1.0.0
  */
-import type { GetPing200Message } from './getPing200Message';
+import type { GetPing200Message } from './getPing200Message'
 
 export type GetPing200 = {
-  message: GetPing200Message;
-  timestamp: string;
-};
+  message: GetPing200Message
+  timestamp: string
+}

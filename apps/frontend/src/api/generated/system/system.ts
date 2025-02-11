@@ -4,9 +4,6 @@
  * Gain API
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useQuery
-} from '@tanstack/react-query'
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -15,93 +12,88 @@ import type {
   QueryKey,
   UndefinedInitialDataOptions,
   UseQueryOptions,
-  UseQueryResult
+  UseQueryResult,
 } from '@tanstack/react-query'
-import type {
-  GetPing200
-} from '../../model'
-import { customInstance } from '../../mutator/custom-instance';
+import { useQuery } from '@tanstack/react-query'
+import type { GetPing200 } from '../../model'
+import { customInstance } from '../../mutator/custom-instance'
 
-
-
-export const getPing = (
-    
- signal?: AbortSignal
-) => {
-      
-      
-      return customInstance<GetPing200>(
-      {url: `/ping`, method: 'GET', signal
-    },
-      );
-    }
-  
+export const getPing = (signal?: AbortSignal) => {
+  return customInstance<GetPing200>({ url: `/ping`, method: 'GET', signal })
+}
 
 export const getGetPingQueryKey = () => {
-    return [`/ping`] as const;
-    }
+  return [`/ping`] as const
+}
 
-    
-export const getGetPingQueryOptions = <TData = Awaited<ReturnType<typeof getPing>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>>, }
-) => {
+export const getGetPingQueryOptions = <
+  TData = Awaited<ReturnType<typeof getPing>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>>
+}) => {
+  const { query: queryOptions } = options ?? {}
 
-const {query: queryOptions} = options ?? {};
+  const queryKey = queryOptions?.queryKey ?? getGetPingQueryKey()
 
-  const queryKey =  queryOptions?.queryKey ?? getGetPingQueryKey();
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getPing>>> = ({ signal }) =>
+    getPing(signal)
 
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPing>>> = ({ signal }) => getPing(signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+  return { queryKey, queryFn, staleTime: 10000, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getPing>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type GetPingQueryResult = NonNullable<Awaited<ReturnType<typeof getPing>>>
 export type GetPingQueryError = unknown
 
+export function useGetPing<TData = Awaited<ReturnType<typeof getPing>>, TError = unknown>(options: {
+  query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>> &
+    Pick<
+      DefinedInitialDataOptions<
+        Awaited<ReturnType<typeof getPing>>,
+        TError,
+        Awaited<ReturnType<typeof getPing>>
+      >,
+      'initialData'
+    >
+}): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetPing<
+  TData = Awaited<ReturnType<typeof getPing>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>> &
+    Pick<
+      UndefinedInitialDataOptions<
+        Awaited<ReturnType<typeof getPing>>,
+        TError,
+        Awaited<ReturnType<typeof getPing>>
+      >,
+      'initialData'
+    >
+}): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetPing<
+  TData = Awaited<ReturnType<typeof getPing>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>>
+}): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useGetPing<TData = Awaited<ReturnType<typeof getPing>>, TError = unknown>(
-  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getPing>>,
-          TError,
-          Awaited<ReturnType<typeof getPing>>
-        > , 'initialData'
-      >, }
-
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetPing<TData = Awaited<ReturnType<typeof getPing>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>> & Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getPing>>,
-          TError,
-          Awaited<ReturnType<typeof getPing>>
-        > , 'initialData'
-      >, }
-
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetPing<TData = Awaited<ReturnType<typeof getPing>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>>, }
-
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-
-export function useGetPing<TData = Awaited<ReturnType<typeof getPing>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>>, }
-
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-
+export function useGetPing<
+  TData = Awaited<ReturnType<typeof getPing>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getPing>>, TError, TData>>
+}): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetPingQueryOptions(options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
 
-  query.queryKey = queryOptions.queryKey ;
+  query.queryKey = queryOptions.queryKey
 
-  return query;
+  return query
 }
-
-
-
