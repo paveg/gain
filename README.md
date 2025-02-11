@@ -51,6 +51,7 @@ A fitness tracking application focused on strength training and workout progress
    ```
 
 3. Open your browser and navigate to:
+
    - Frontend: [http://localhost:5173](http://localhost:5173)
    - Backend: [http://localhost:8787](http://localhost:8787)
 
