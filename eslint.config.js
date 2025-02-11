@@ -11,16 +11,16 @@ export default [
       },
     },
     ignores: [
-      // 自動生成されるコード
+      // Generated code
       '**/generated/**',
       '**/model/**',
       '**/api/client.ts',
 
-      // 設定ファイル
+      // Config files
       '**/*.config.js',
       '**/*.config.ts',
 
-      // ビルド出力
+      // Build output
       '**/dist/**',
       '**/build/**',
     ],

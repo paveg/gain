@@ -48,7 +48,7 @@ app.openapi(pingRoute, c => {
   })
 })
 
-// OpenAPI仕様の生成
+// Generate OpenAPI specification
 const apiSpec = {
   openapi: '3.0.0',
   info: {
@@ -89,7 +89,7 @@ const apiSpec = {
 const openApiPath = resolve(__dirname, '../openapi.json')
 writeFileSync(openApiPath, JSON.stringify(apiSpec, null, 2))
 
-// サーバーの起動
+// Server startup
 const port = 8787
 console.log(`Server is running on port ${port}`)
 

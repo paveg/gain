@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
+// TODO: Use environment variable for this
 const BACKEND_URL = 'http://localhost:8787'
 
 interface CustomRequestConfig extends Omit<AxiosRequestConfig, 'url' | 'method'> {
