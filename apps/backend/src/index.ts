@@ -30,6 +30,56 @@ const pingRoute = createRoute({
   },
 })
 
+// トレーニングメトリクスのスキーマ定義
+const TrainingMetricsSchema = z.object({
+  height: z.number(),
+  weight: z.number(),
+  gender: z.enum(['male', 'female', 'other']),
+  frequency: z.number(),
+  benchPress: z.number(),
+  squat: z.number(),
+  deadlift: z.number(),
+})
+
+// トレーニングプログラムの型定義
+const TrainingProgramSchema = z.object({
+  exercises: z.array(z.object({
+    name: z.string(),
+    sets: z.number(),
+    reps: z.number(),
+    weight: z.number().optional(),
+    rpe: z.number().optional(),
+    notes: z.string().optional(),
+  })),
+  day: z.number(),
+})
+
+const generateProgramRoute = createRoute({
+  method: 'post',
+  path: '/training/program',
+  request: {
+    body: {
+      content: {
+        'application/json': {
+          schema: TrainingMetricsSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      content: {
+        'application/json': {
+          schema: z.object({
+            program: z.array(TrainingProgramSchema),
+          }),
+        },
+      },
+      description: 'Generated training program',
+    },
+  },
+})
+
 app.doc('/api/docs', {
   openapi: '3.0.0',
   info: {
@@ -46,6 +96,63 @@ app.openapi(pingRoute, c => {
     message: 'pong!' as const,
     timestamp: new Date().toISOString(),
   })
+})
+
+// トレーニングプログラム生成のロジック
+function generateTrainingProgram(metrics: z.infer<typeof TrainingMetricsSchema>) {
+  const programs = []
+  
+  // プッシュの日のプログラム
+  const pushDay = {
+    day: 1,
+    exercises: [
+      {
+        name: "ベンチプレス（メイン）",
+        sets: 3,
+        reps: 5,
+        weight: Math.round(metrics.benchPress * 0.85), // RPE8相当の重量
+        rpe: 8,
+        notes: "メインセット"
+      },
+      {
+        name: "ベンチプレス（バックオフ）",
+        sets: 3,
+        reps: 8,
+        weight: Math.round(metrics.benchPress * 0.75), // メインセットの-10%程度
+        notes: "バックオフセット"
+      },
+      {
+        name: "プルアップ",
+        sets: 4,
+        reps: 8,
+        notes: "自重で実施。できない場合はラットプルダウンで代替"
+      },
+      {
+        name: "ライイングトライセプスエクステンション",
+        sets: 3,
+        reps: 12,
+        notes: "フォームを重視"
+      },
+      {
+        name: "バランストレーナー",
+        sets: 3,
+        reps: 15,
+        notes: "腹筋の意識を高く"
+      }
+    ]
+  }
+
+  programs.push(pushDay)
+
+  // 同様にプル・レッグの日のプログラムも追加可能
+  
+  return programs
+}
+
+app.openapi(generateProgramRoute, (c) => {
+  const metrics = c.req.valid('json')
+  const program = generateTrainingProgram(metrics)
+  return c.json({ program })
 })
 
 // Generate OpenAPI specification

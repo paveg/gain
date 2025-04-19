@@ -1,14 +1,15 @@
-import { PingButton } from './components/PingButton'
-import { QueryProvider } from './providers/query-provider'
+import { TrainingMetricsForm } from './components/TrainingMetricsForm'
 
 function App() {
   return (
-    <QueryProvider>
-      <div className='p-4'>
-        <h1 className='text-4xl font-bold mb-4'>Welcome to Gain</h1>
-        <PingButton />
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="container mx-auto">
+        <h1 className="text-2xl font-bold text-center mb-8">
+          パーソナライズドトレーニングプログラム
+        </h1>
+        <TrainingMetricsForm />
       </div>
-    </QueryProvider>
+    </div>
   )
 }
 
